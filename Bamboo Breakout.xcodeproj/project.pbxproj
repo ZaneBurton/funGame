@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		649E6947225BA5F200803BB9 /* shattering.wav in Resources */ = {isa = PBXBuildFile; fileRef = 649E6946225BA5F100803BB9 /* shattering.wav */; };
+		649E6949225BA87600803BB9 /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 649E6948225BA87500803BB9 /* background.mp3 */; };
 		F577B38F1CB81F840005E827 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F577B38E1CB81F840005E827 /* AppDelegate.swift */; };
 		F577B3911CB81F840005E827 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F577B3901CB81F840005E827 /* GameScene.sks */; };
 		F577B3931CB81F840005E827 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F577B3921CB81F840005E827 /* GameScene.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		649E6946225BA5F100803BB9 /* shattering.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shattering.wav; sourceTree = "<group>"; };
+		649E6948225BA87500803BB9 /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
 		F577B38B1CB81F840005E827 /* Bamboo Breakout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bamboo Breakout.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F577B38E1CB81F840005E827 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F577B3901CB81F840005E827 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -116,8 +120,10 @@
 			isa = PBXGroup;
 			children = (
 				F597B1211CC1B1F000D398E0 /* BambooBreak.wav */,
+				649E6948225BA87500803BB9 /* background.mp3 */,
 				F577B3B21CB8210A0005E827 /* game-over.wav */,
 				F577B3B31CB8210A0005E827 /* game-won.mp3 */,
+				649E6946225BA5F100803BB9 /* shattering.wav */,
 				F577B3B41CB8210A0005E827 /* paddleBlip.wav */,
 				F577B3B51CB8210A0005E827 /* pongblip.wav */,
 			);
@@ -189,7 +195,9 @@
 				F577B3B81CB8210A0005E827 /* game-won.mp3 in Resources */,
 				F597B1221CC1B1F000D398E0 /* BambooBreak.wav in Resources */,
 				F577B39D1CB81F840005E827 /* LaunchScreen.storyboard in Resources */,
+				649E6949225BA87600803BB9 /* background.mp3 in Resources */,
 				F577B3B71CB8210A0005E827 /* game-over.wav in Resources */,
+				649E6947225BA5F200803BB9 /* shattering.wav in Resources */,
 				F577B39A1CB81F840005E827 /* Assets.xcassets in Resources */,
 				F5B9A2201CC1392A000D5BC7 /* BrokenPlatform.sks in Resources */,
 				F577B3B91CB8210A0005E827 /* paddleBlip.wav in Resources */,

@@ -31,6 +31,8 @@ let BallCategoryName = "ball"
 let PaddleCategoryName = "paddle"
 let BlockCategoryName = "block"
 let GameMessageName = "gameMessage"
+var count = 0
+var count2 = 0
 
 let BallCategory   : UInt32 = 0x1 << 0
 let BottomCategory : UInt32 = 0x1 << 1
@@ -100,8 +102,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             // 3
             if firstBody.categoryBitMask == BallCategory && secondBody.categoryBitMask == BottomCategory {
-                gameState.enter(GameOver.self)
-                gameWon = false
+                count+=1
+                if count > 3 && count <= 4 {
+                    addBlock()
+                }
+                if count > 4 && count <= 5 {
+                    addBlockWithBounce()
+                }
+                //  gameState.enter(GameOver.self)
+              //  gameWon = false
             }
             if firstBody.categoryBitMask == BallCategory && secondBody.categoryBitMask == BlockCategory {
                 breakBlock(node: secondBody.node!)
@@ -115,8 +124,80 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
+    func addBlockWithBounce() {
+        for _ in 1...5 {
+            let randomX = randomFloat(from: 100, to: 500)
+            let randomY = randomFloat(from: 100, to: 300)
+            let numberOfBlocks = 1
+            let blockWidth = SKSpriteNode(imageNamed: "block").size.width
+            let totalBlocksWidth = blockWidth * CGFloat(numberOfBlocks)
+            // 2
+            let xOffset = (frame.width - totalBlocksWidth) / 2
+            // 3
+            for i in 0..<numberOfBlocks {
+                let block = SKSpriteNode(imageNamed: "block.png")
+                block.position = CGPoint(x: randomX,
+                                         y: randomY)
+                
+                
+                block.physicsBody = SKPhysicsBody(rectangleOf: block.frame.size)
+                block.physicsBody!.allowsRotation = true
+                block.physicsBody!.friction = 0.0
+                block.physicsBody!.restitution = 3.0
+                block.physicsBody!.affectedByGravity = true
+                block.physicsBody!.isDynamic = false
+                block.name = BlockCategoryName
+                block.physicsBody!.categoryBitMask = BlockCategory
+                block.zPosition = 2
+                
+                addChild(block)
+            }
+        }
+    }
+    func addBlock() {
+        for _ in 1...5 {
+            let randomX = randomFloat(from: 100, to: 500)
+            let randomY = randomFloat(from: 100, to: 300)
+            let numberOfBlocks = 1
+            let blockWidth = SKSpriteNode(imageNamed: "block").size.width
+            let totalBlocksWidth = blockWidth * CGFloat(numberOfBlocks)
+            // 2
+            let xOffset = (frame.width - totalBlocksWidth) / 2
+            // 3
+            for i in 0..<numberOfBlocks {
+                let block = SKSpriteNode(imageNamed: "block.png")
+                block.position = CGPoint(x: randomX,
+                                         y: randomY)
+                
+                
+                block.physicsBody = SKPhysicsBody(rectangleOf: block.frame.size)
+                block.physicsBody!.allowsRotation = false
+                block.physicsBody!.friction = 0.0
+                block.physicsBody!.affectedByGravity = false
+                block.physicsBody!.isDynamic = false
+                block.name = BlockCategoryName
+                block.physicsBody!.categoryBitMask = BlockCategory
+                block.zPosition = 2
+                func changeBlock() {
+                    block.texture = SKTexture(imageNamed: "taco1")
+                }
+                addChild(block)
+            }
+        }
+    }
+    
+    
     func breakBlock(node: SKNode) {
+        count2+=1
         let particles = SKEmitterNode(fileNamed: "BrokenPlatform")!
+        run(SKAction.playSoundFileNamed("shattering.wav", waitForCompletion: false))
+        
+        let paddle = childNode(withName: PaddleCategoryName) as! SKSpriteNode
+        if count2 % 2 == 0 {
+            paddle.texture = SKTexture(imageNamed: "paddle")
+        } else {
+            paddle.texture = SKTexture(imageNamed: "taco1")
+        }
         particles.position = node.position
         particles.zPosition = 3
         addChild(particles)
@@ -180,6 +261,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   override func didMove(to view: SKView) {
     super.didMove(to: view)
     
+    
     // 1
     let numberOfBlocks = 8
     let blockWidth = SKSpriteNode(imageNamed: "block").size.width
@@ -200,9 +282,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         block.name = BlockCategoryName
         block.physicsBody!.categoryBitMask = BlockCategory
         block.zPosition = 2
+        func changeBlock() {
+            block.texture = SKTexture(imageNamed: "taco1")
+        }
         addChild(block)
         
-        
+        let backgroundMusic = SKAudioNode(fileNamed: "background.mp3")
+        backgroundMusic.autoplayLooped = true
+        addChild(backgroundMusic)
     }
 
     
